@@ -1,0 +1,71 @@
+// Refresh page viewers
+/**
+* @file
+* Global jQuery, Drupal, drupalSettings, window
+* jslint white:true, multivar, this, browser:true.
+*/
+(function ($, Drupal, drupalSettings, window) {
+ "use strict";
+
+ Drupal.behaviors.subseven = {
+   attach: function (context, settings) {
+     /* SCRIPT START */
+
+    console.log('NAVIGUS Script Working');
+	var refresh_page_viewers = function() {
+		   console.log('refresh_page_viewers');
+            var response = true;
+			if(response == true){
+                // This makes it unable to send a new request 
+                // unless you get response from last request
+                response = false;
+				$.ajax({
+				   url: 'http://localhost/navigus/viewers/refresh?_format=json',
+				   datatype: 'jsonp',
+				   //context: element,
+				   complete: function (xhr, status) {
+					   // This makes it able to send new request on the next interval
+                      response = true;
+				   },
+				   success: function (response) {
+						console.log("Response get successful!");
+						console.log(response);
+						$('#block-currentviewersblock .content').html(response.data);
+				   },
+				 });
+            }
+        }
+
+        refresh_page_viewers();
+		setInterval(refresh_page_viewers, 10000);
+
+    
+	 /*$.ajax({
+           url: '/update-businesses-sales-rep?businessId=' + businessId + '&salesRepId=' + salesRepId,
+           context: element,
+           complete: function (xhr, status) {
+             $(this).removeClass('loading');
+             if (xhr.status != 200) {
+               $($(this).data('lastParent')).append(this);
+             } else {
+               $(".business_container #sortable1").append(element);
+             }
+           },
+           success: function (response) {
+             if (response.sales_rep_icon) {
+               element.find('.business_user').html(response.sales_rep_icon);
+               element.find('.business_user').attr('data-sales-rep-id', salesRepId);
+             } else {
+               element.find('.business_user').html('<i class="fas fa-user-circle" data-toggle="tooltip" data-placement="right" title="' + response.sales_rep_name + '"></i>');
+               element.find('.business_user').attr('data-sales-rep-id', salesRepId);
+             }
+
+             tool_tip();
+           },
+         });*/
+
+
+    /* SCRIPT END */
+   }
+ };
+}(jQuery, Drupal, drupalSettings, window));

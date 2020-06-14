@@ -1,0 +1,4 @@
+navigus:
+  version: 1.x
+  js:
+    js/navigus.js: {}

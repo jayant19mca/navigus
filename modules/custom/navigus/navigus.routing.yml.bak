@@ -1,0 +1,19 @@
+navigus:
+ path: /homepage
+ defaults:
+   _controller: Drupal\navigus\Controller\NavigusHomePageController::content
+ requirements:
+   _role: 'authenticated'
+
+navigus:
+ path: /homepage
+ defaults:
+   _controller: Drupal\navigus\Controller\NavigusHomePageController::content
+ requirements:
+   _role: 'authenticated'
+
+
+
+ viewers/refresh
+
+ viewers/refresh

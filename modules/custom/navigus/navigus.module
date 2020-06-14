@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * hook_page_attachments().
+ */
+function navigus_page_attachments(array &$attachments) {
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if ($route_name == 'entity.node.canonical') {
+	  $node = \Drupal::routeMatch()->getParameter('node');
+	  if ($node instanceof \Drupal\node\NodeInterface) {
+	      $nid = $node->id();
+	      if($nid == 1){
+		$attachments['#attached']['library'][] = 'navigus/navigus';
+	      }
+	  }
+	  }
+}
